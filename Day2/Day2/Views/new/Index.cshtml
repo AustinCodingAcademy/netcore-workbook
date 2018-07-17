@@ -1,0 +1,33 @@
+﻿@model Day2.Models.Greeting2
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>My View</title>
+</head>
+
+<body>
+    <header>
+        <div class="head">
+
+            @**if(DateTime.Now.Hour >= 12 ? "Evening" : "Morning")*@
+            <div>
+                @if (DateTime.Now.Hour >= 12)
+                {
+                    <p>Good Evening @Model.FirstName  @Model.LastName</p>
+
+                }
+                else
+                {
+                    <p>Good Morning @Model.FirstName  @Model.LastName</p>
+
+                }
+            </div>
+        </div>
+
+    </header>
+</body>
+</html>
+
+
