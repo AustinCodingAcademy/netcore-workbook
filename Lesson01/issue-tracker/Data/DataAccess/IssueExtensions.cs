@@ -16,6 +16,11 @@ namespace IssueTracker.DataAccess
 
         public static List<string> PastStates(this DataAccess.Contracts.Issue issue)
         {
+            var result = new List<string>();
+            foreach (var item in issue.St)
+            {
+                result.Add(item.ToString());
+            }
             return Enum.GetValues(typeof(IssueType)).Cast<IssueType>().Where(v => issue.Type.HasFlag(v)).Select(v => v.ToString()).ToList();
         }
     }

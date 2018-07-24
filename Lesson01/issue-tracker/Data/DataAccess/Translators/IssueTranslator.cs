@@ -18,7 +18,7 @@ namespace IssueTracker.DataAccess.Translators
                 Id = issue.Id,
                 Title = issue.Title,
                 Description = issue.Description,
-                Estimate = issue.Estimate.ToString(),
+                Estimate = issue.Estimate,
                 PastStates = issue.PastStates()
             };
             if ((int)issue.Type < 1) result.Status = "Not Started";
@@ -34,13 +34,17 @@ namespace IssueTracker.DataAccess.Translators
             if (issue == null)
                 return null;
 
+            //Contracts.Issue result = null;
             var result = new Contracts.Issue
             {
                 Id = issue.Id,
                 Title = issue.Title,
                 Description = issue.Description,
-                Estimate = decimal.Parse(issue.Estimate)
+                Estimate = issue.Estimate
             };
+
+               
+
 
             if (string.IsNullOrEmpty(issue.Status)) result.Type = IssueType.NotStarted;
             else if (issue.Status.Equals("In Progress", StringComparison.CurrentCultureIgnoreCase)) result.Type = IssueType.InProgress;
