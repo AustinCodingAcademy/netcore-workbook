@@ -1,7 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "COOL PAGE";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+@model RegisterViewModel
 
 <p>Use this area to provide additional information.</p>
+<form asp-controller="Demo" asp-action="RegisterInput" autocomplete="on" method="post">
+    Email:  <input asp-for="Email" /> <br />
+    <br />
+    Password: <input asp-for="Password" />
+    <br />
+    <br />
+    <button type="submit">Register</button>
+</form>
