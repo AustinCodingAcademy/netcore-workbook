@@ -6,18 +6,29 @@
     <h1>Issue Tracker</h1>
 </div>
 <div class="row">
-    <div class="col-md-4">
-        <h2>Welcome to Issue Tracker</h2>
-        <p>
-            Issue Tracker is an application for tracking ticket
-            issues from origination to completion. Think Trello,
-            but better (one day)!
-        </p>
-    </div>
+    @{ 
+        var cardModel = new CardModel
+        {
+            Title = "Welcome to Issue Tracker",
+            Content = "Issue Tracker is an application for tracking ticket issues from origination to completion.Think Trello but better(one day)!"
+        };
+    }
+
+    @await Component.InvokeAsync("Card", cardModel)
+    @*<div class="col-md-4">
+            <h2>Welcome to Issue Tracker</h2> 
+            <p>
+                Issue Tracker is an application for tracking ticket
+                issues from origination to completion. Think Trello,
+                but better (one day)!
+            </p>
+        </div>*@
     <div class="col-md-4">
         <h2>Build it from scratch</h2>
-        <p>We will be building this up from scratch though out the class, 
-        so think of ways to reuse what you create throughout the course.</p>
+        <p>
+            We will be building this up from scratch though out the class,
+            so think of ways to reuse what you create throughout the course.
+        </p>
     </div>
     <div class="col-md-4">
         <h2>Download it</h2>

@@ -9,10 +9,10 @@ namespace BaseProject.Intrastructure
     [HtmlTargetElement("day-of-week", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class DayOfTheWeekTagHelper : TagHelper
     {
-        private readonly DateTimeProvider _dateTimeProvider;
-        public DayOfTheWeekTagHelper()
+        private readonly IDateTimeProvider _dateTimeProvider;
+        public DayOfTheWeekTagHelper(IDateTimeProvider dateTimeProvider)
             {
-                _dateTimeProvider = new DateTimeProvider();
+                _dateTimeProvider = dateTimeProvider;
                 
 
             }

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace BaseProject.Intrastructure
 {
-    public class DateTimeProvider
+    public class DateTimeProvider : IDateTimeProvider
     {
  
 
@@ -9,9 +9,14 @@ namespace BaseProject.Intrastructure
         {
             get
             {
-                return DateTime.Now.AddDays(1);
+                return DateTime.Now;
             }
         }
+    }
+    public interface IDateTimeProvider
+    {
+        DateTime Now { get; }
+        
     }
 }
 

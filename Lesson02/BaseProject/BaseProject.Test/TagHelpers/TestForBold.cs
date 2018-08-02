@@ -11,14 +11,14 @@ using System.Linq;
 
 namespace BaseProject.Test.TagHelpers
 {
-    public class MyMockedDateTimeProvider : IDateTimeProvider
+    public class MyMockedB : IDateTimeProvider
     {
         public DateTime Now { get; set; }
     }
-    public class DayOfTheWeekTagHelperTests
+    public class TestForBold
     {
         [Fact]
-        public void TagHelper_ShouldShowCurrentDayOfTheWeek()
+        public void TagHelper_ShouldShowBoldCurrnetDayOfWeek()
         {
             var now = DateTime.Now;
             foreach (var day in Enumerable.Range(0, 6).Select(i => now.AddDays(i)))
@@ -47,7 +47,9 @@ namespace BaseProject.Test.TagHelpers
 
                 // Assert
                 //show current day
-                Assert.Contains(mockDateTimeProvider.Now.DayOfWeek.ToString(), output.Content.GetContent());
+                var content = output.Content.GetContent();
+                System.Diagnostics.Debug.WriteLine("test this out");
+                Assert.Equal("b",output.TagName);
             }
         }
     }

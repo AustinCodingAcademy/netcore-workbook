@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BaseProject.Intrastructure;
 
 namespace BaseProject
 {
@@ -27,6 +28,7 @@ namespace BaseProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton<IDateTimeProvider>(new DateTimeProvider());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
