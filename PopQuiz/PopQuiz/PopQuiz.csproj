@@ -11,4 +11,7 @@
   <ItemGroup>
     <Folder Include="Views\PopQuiz\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\PopModel.cs" />
+  </ItemGroup>
 </Project>
