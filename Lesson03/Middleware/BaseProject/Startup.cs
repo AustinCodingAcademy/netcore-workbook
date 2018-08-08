@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseProject.Intrastructure;
@@ -12,11 +13,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.Logging;
+//using Microsoft.Extensions.Logging.Debug;
+
+
 
 namespace BaseProject
 {
     public class Startup
     {
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,11 +35,22 @@ namespace BaseProject
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IDateTimeProvider>(new DateTimeProvider());
+             
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //app.Use(async (context, next) =>
+            //{
+            //    var start = new Stopwatch();
+            //    await next();
+            //    start.Stop();
+            //    Console.WriteLine(start.ElapsedMilliseconds);
+
+            //});
+
+                                           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -42,10 +59,19 @@ namespace BaseProject
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseMiddleware<TimingMiddleware>();
+
+            app.UseMiddleware<UnwrapExceptionMiddleware>();
 
             app.UseStaticFiles();
 
             app.UseMvc();
+          
+
         }
+
+
+
+
     }
 }

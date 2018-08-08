@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BaseProject.Intrastructure;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace BaseProject
 {
@@ -38,6 +39,8 @@ namespace BaseProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseResponseCaching();
+
             }
             else
             {
@@ -50,3 +53,43 @@ namespace BaseProject
         }
     }
 }
+
+//    public class RequestLoggingMiddleware
+//        {
+//            private readonly RequestDelegate _next;
+//            private readonly ILogger<RequestLoggingMiddleware> _logger;
+
+//            public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger)
+//            {
+//                _next = next;
+//                _logger = logger;
+//            }
+
+
+//            public async Task Invoke(HttpContext context)
+//            {
+//                var startTime = DateTime.UtcNow;
+
+//                var watch = Stopwatch.StartNew();
+//                await _next.Invoke(context);
+//                watch.Stop();
+
+//                var logTemplate = @"
+//    Client IP: {clientIP}
+//    Request path: {requestPath}
+//    Request content type: {requestContentType}
+//    Request content length: {requestContentLength}
+//    Start time: {startTime}
+//    Duration: {duration}";
+
+//                _logger.LogInformation(logTemplate,
+//                    context.Connection.RemoteIpAddress.ToString(),
+//                    context.Request.Path,
+//                    context.Request.ContentType,
+//                    context.Request.ContentLength,
+//                    startTime,
+//                    watch.ElapsedMilliseconds);
+//            Console.Write(_logger);
+//            }
+//        }
+//}
