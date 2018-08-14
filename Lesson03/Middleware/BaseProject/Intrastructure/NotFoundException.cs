@@ -3,10 +3,6 @@ namespace BaseProject.Intrastructure
 {
     public class NotFoundException: Exception
     {
-        public NotFoundException()
-        {
-
-
-        }
+        //public NotFoundException(string username): base
     }
 }

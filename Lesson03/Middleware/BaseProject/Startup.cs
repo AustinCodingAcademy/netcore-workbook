@@ -66,7 +66,6 @@ namespace BaseProject
             app.UseStaticFiles();
 
             app.UseMvc();
-          
 
         }
 
