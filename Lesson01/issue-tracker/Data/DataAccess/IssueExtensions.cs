@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace IssueTracker.DataAccess
 {
     internal static class IssueExtensions
@@ -17,11 +18,12 @@ namespace IssueTracker.DataAccess
         public static List<string> PastStates(this DataAccess.Contracts.Issue issue)
         {
             var result = new List<string>();
-            foreach (var item in issue.St)
+            foreach (var item in issue.Statuses)
             {
                 result.Add(item.ToString());
             }
-            return Enum.GetValues(typeof(IssueType)).Cast<IssueType>().Where(v => issue.Type.HasFlag(v)).Select(v => v.ToString()).ToList();
+            return result;
+            //return Enum.GetValues(typeof(IssueType)).Cast<IssueType>().Where(v => issue.Type.HasFlag(v)).Select(v => v.ToString()).ToList();
         }
     }
 }

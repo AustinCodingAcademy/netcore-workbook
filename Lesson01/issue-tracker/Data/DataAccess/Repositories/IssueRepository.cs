@@ -50,10 +50,13 @@ namespace IssueTracker.Data.Repositories
             var translated = translator.ToModel(issue);
             current.Title = translated.Title;
             current.Description = translated.Description;
-            current.Type = translated.Type;
-
             current.Estimate = translated.Estimate;
-            current.Statuses.Add(translated.Type);
+            current.Type = translated.Type;
+            if (!current.Statuses.Contains(translated.Type))
+            {
+                current.Statuses.Add(translated.Type);
+            }
+
             
             //// Capture the history of states
             //if ((current.Type & translated.Type) != translated.Type)

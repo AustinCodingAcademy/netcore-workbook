@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using System;
+
 
 namespace IssueTracker.Domain.Contracts
 {
@@ -12,8 +13,8 @@ namespace IssueTracker.Domain.Contracts
         public decimal Estimate { get; set; }
         public string Status { get; set; }
         public List<string> PastStates { get; set; }
-        public IssueType Type { get; set; }
-        public List<IssueType> Statuses = new List<IssueType>();
+        //public IssueType Type { get; set; }
+        //public List<IssueType> Statuses = new List<IssueType>();
 
     }
 }
