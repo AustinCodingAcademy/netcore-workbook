@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BaseProject.Models;
 using BaseProject.Intrastructure;
+using System.Diagnostics.Contracts;
 
 namespace BaseProject.Controllers
 {
@@ -23,10 +24,11 @@ namespace BaseProject.Controllers
         [Route("/")]     // Doesn't combine, defines the route template ""
         public IActionResult Index([FromQuery] string username)
         {
-            if (allowedUsers.Contains(username))
+            //Contract.Ensures(Contract.Result<IActionResult>() != null);
+            //if (allowedUsers.Contains(username))
                 return View();
-            else
-                throw new NotFoundException();
+            //else
+                //throw new NotFoundException(username);
         }
 
         [Route("About")]

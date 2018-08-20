@@ -4,69 +4,37 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SPA.Models
 {
-    public class Appointment
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Date;
-
-        public List<ServiceProvider> serviceProviders;
-
-        public Appointment(string Date)
-        {
-            this.Date = Date;
-            this.serviceProviders = new List<ServiceProvider>();
-        }
-
-    }
-
 
     public class Customer
     {
+
         public int Id { get; set; }
         public string _firstName { get; set; }
         public string _lastName { get; set; }
-    }
 
-
-
-
-
-        //public List<Appointment> appointments;
-
-
-        //public Customer(string first_name, string last_name)
+        //public void EnterName(string name)
         //{
-        //    this.first_name = first_name;
-        //    this.last_name = last_name;
+        //    this._lastName = name.ToString<_firstName>;
         //}
 
-        //public string AddContainer(Container container)
-        //{
-        //if (this.containers.Count < this.size)
-        //{
-        //    this.containers.Add(container);
-        //    return "Container Added";
 
+        //    public Customer(string _firstName, string _lastName)
+        //    {
+        //        //this._firstName = _firstName;
+        //        this._lastName = _lastName;
+        //    }
+
+        //    public List<Customer> Names { get; set; }
+
+        //    public static implicit operator List<object>(Customer v)
+        //    {
+        //        throw new NotImplementedException();
+        //    }
         //}
-        //return "NO MORE ROOM";
 
 
 
 
-
-    public class ServiceProvider
-    {
-        public int Id { get; set; }
-        public string name;
-
-
-
-        //constructor funtion
-        public ServiceProvider(int Id, string name)
-        {
-            this.name = name;
-        }
 
 
     }

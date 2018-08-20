@@ -1,0 +1,39 @@
+﻿using System;
+using Linq;
+@model SPA.Models.Customer
+
+
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <label asp-for="_firstName"></label>
+    <input asp-for="@Model._firstName" />
+    <span asp-validation-for="_firstName"></span>
+    <input asp-for="@Model._lastName" />
+    <input type="submit" value="submit Me" />
+</form>
+@*<h4>Customer</h4>
+<hr />
+<div class="row">
+<div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="_firstName" class="control-label"></label>
+                <input asp-for="_firstName" asp-action="Index" method="post" class="form-control" a />
+                <span asp-validation-for="_firstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="_lastName" class="control-label"></label>
+                <input asp-for="_lastName" asp-action="Index" method="post" class="form-control" a />
+                <span asp-validation-for="_lastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>*@
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
