@@ -11,19 +11,19 @@
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Id)
-        </dt>
+        ID</dt>
         <dd>
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model._firstName)
         </dt>
-        <dd>
+        First Name<dd>
             @Html.DisplayFor(model => model._firstName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model._lastName)
-        </dt>
+        Last Name</dt>
         <dd>
             @Html.DisplayFor(model => model._lastName)
         </dd>
@@ -32,5 +32,5 @@
 </div>
 <div>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
-    <a asp-action="Create">Back to Customer</a>
+    <a asp-action="CustomerInfo">Back to Customer</a>
 </div>

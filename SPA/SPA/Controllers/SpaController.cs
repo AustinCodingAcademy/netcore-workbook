@@ -20,14 +20,16 @@ namespace SPA.Controllers
             return View();
         }
 
-        [Route("Create")]
+       
         [HttpGet]
 
-        public IActionResult Create()
+        public IActionResult CustomerInfo()
         {
 
             var name = new Customer
             {
+
+                Id = 1,
                 _firstName = "",
                 _lastName = "" 
             };
@@ -35,15 +37,16 @@ namespace SPA.Controllers
         }
 
 
-        [Route("Create")]
+
         [HttpPost]
 
-        public IActionResult Create(Customer name)
+        public IActionResult CustomerInfo(Customer name)
         {
             
             Console.WriteLine(name._firstName);
-            Console.WriteLine(name.LastName);
-            return Redirect(nameof(Create));
+            Console.WriteLine(name._lastName);
+            Console.WriteLine(name.Id);
+            return Redirect(nameof(CustomerInfo));
         }
 
         public IActionResult Remove()
@@ -52,6 +55,27 @@ namespace SPA.Controllers
         }
         public IActionResult Details()
         {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Appointments()
+        {
+            var time = new Apts
+            {
+
+                Id = 1,
+                JoinDate = new DateTime(int year, int month, int day)
+                
+            };
+            return View(time);
+
+            
+        }
+        [HttpPost]
+        public IActionResult Appointments()
+        {
+
+            Console.WriteLine()
             return View();
         }
     }

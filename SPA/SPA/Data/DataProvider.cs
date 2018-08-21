@@ -8,7 +8,7 @@ namespace SPA.Data
         public void Save()
         {
             var controller = new SpaController();
-            controller.Create();
+            controller.CustomerInfo();
             
         }
 
