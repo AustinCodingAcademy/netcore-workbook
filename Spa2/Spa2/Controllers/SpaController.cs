@@ -13,7 +13,7 @@ namespace Spa2.Controllers
         public IActionResult CustomerName()
         {
             
-            var name = new Customer
+            var Name = new Customer
             {
                 Id = 1,
                 name = ""
@@ -21,12 +21,12 @@ namespace Spa2.Controllers
             };
             return View();
 
-            List<string> customers = new List<string>();
+            //List<string> customers = new List<string>();
 
-            foreach (string whatever in customers)
-            {
-                customers.Add(whatever);
-            }
+            //foreach (string whatever in customers)
+            //{
+            //    customers.Add(whatever);
+            //}
 
 
 
@@ -34,10 +34,10 @@ namespace Spa2.Controllers
         }
         [HttpPost]
 
-        public IActionResult CustomerName(Customer name)
+        public IActionResult CustomerName(Customer Name)
         {
-            Console.WriteLine(name.Id);
-            Console.WriteLine(name.name);
+            Console.WriteLine(Name.Id);
+            Console.WriteLine(Name.name);
 
             
             return Redirect(nameof(CustomerName));
@@ -48,8 +48,8 @@ namespace Spa2.Controllers
         {
             var time = new Appointment()
             {
-                AptTime = ""
-                //Date = 
+                //AptTime = ""
+                Date = 
 
             };
             return View();
@@ -59,7 +59,7 @@ namespace Spa2.Controllers
         [HttpPost]
         public IActionResult AptView(Appointment time)
         {
-            Console.WriteLine(time.AptTime);
+            Console.WriteLine(time.Date);
             //Console.WriteLine(Date);
         
             return Redirect(nameof(AptView));
