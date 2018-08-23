@@ -1,36 +1,33 @@
-﻿@model Spa2.Models.Customer
+﻿@model BaseProject.Areas.Comments.Models.Create
 
 @{
-    ViewData["Title"] = "CustomerName";
+    ViewData["Title"] = "View";
 }
 
-<h2>Enter Customer Name</h2>
+<h2>View</h2>
 
-
+<h4>Create</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CustomerName">
+        <form method="post" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="@Model.Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
                 <label asp-for="name" class="control-label"></label>
-                <input asp-for="@Model.name" class="form-control" />
+                <input asp-for="name" class="form-control" />
                 <span asp-validation-for="name" class="text-danger"></span>
             </div>
-            <br />
+            <div class="form-group">
+                <label asp-for="number" class="control-label"></label>
+                <input asp-for="number" class="form-control" />
+                <span asp-validation-for="number" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
-<br />
 
 <div>
     <a asp-action="Index">Back to List</a>

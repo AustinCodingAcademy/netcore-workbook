@@ -1,112 +1,110 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace Spa2.Models
 {
-    public class Repository
+    public class Repository : IRepository
+
     {
-        //private int _availableTimes = { 8, 9, 10, 11, 12, 1, 2, 3, 4, 5 };
-        private List<ServiceProvider> serviceProviders = new List<ServiceProvider>();
-        public List<Appointment> appointments = new List<Appointment>();
-
+        //LISTS
         public List<Customer> Customers { get; } = new List<Customer>();
+        
+        public List<ServiceProvider> ServiceProviders { get;  } = new List<ServiceProvider>();
+ 
+        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
 
-        public List<ServiceProvider> ServiceProviders
+
+
+
+        //EXCEPTIONS
+        public class InvalidCustomerException : Exception
         {
-            get
+            public InvalidCustomerException(string message) : base(message)
             {
-                return serviceProviders;
             }
         }
 
-        public List<Appointment> Appointments
+        public class InvalidAppointmentException : Exception
         {
-            get
+            public InvalidAppointmentException(string message) : base(message)
             {
-                return appointments;
+            }
+        }
+        public class InvalidServiceProviderException : Exception
+        {
+            public InvalidServiceProviderException(string message) : base(message)
+            {
             }
         }
 
+        //ADD AND REMOVE CUSTOMERS
         public void AddCustomer(Customer customer)
         {
             Customers.Add(customer);
         }
+        public void RemoveCustomer(Customer customer)
+        {
+            Customers.Remove(customer);
+        }
 
+
+        //ADD AND REMOVE SERVICE PROVIDERS
         public void AddServiceProvider(ServiceProvider serviceProvider)
         {
-            serviceProviders.Add(serviceProvider);
+            ServiceProviders.Add(serviceProvider);
+        }
+        public void RemoveServiceProvider(ServiceProvider serviceProvider)
+        {
+            ServiceProviders.Remove(serviceProvider);
         }
 
+        //ADD AND REMOVE APPOINTMENTS
         public void AddAppointment(Appointment appointment)
         {
-            appointments.Add(appointment);
+            Appointments.Add(appointment);
+            Appointments = Appointments.OrderBy(a => a.Day).ThenBy(a => a.Hour).ToList();
+            
         }
+
+        public void RemoveAppointment(Appointment appointment)
+        {
+            Appointments.Remove(appointment);
+            
+            
+        }
+
+        public void BookAppointment(Appointment appointment)
+        {
+            List<Appointment> appointments = this.Appointments;
+
+           
+
+            var isInvalidAppointment = appointments.Any(a => ((a.Name == appointment.Name
+                || a.Provider == appointment.Provider)
+                && a.Day == appointment.Day && a.Hour == a.Hour));
+            if (isInvalidAppointment)
+                throw new InvalidAppointmentException("Invalid Appointment");
+
+            var isValidCustomer = Customers.Any(c => c.FirstName == appointment.Name);
+            if (!isValidCustomer)
+            {
+                throw new InvalidCustomerException("Invalid Customer");
+            }
+
+            var isValidServiceProvider = ServiceProviders.Any(c => c.FullName == appointment.Provider);
+            if (!isValidServiceProvider)
+            {
+                throw new InvalidServiceProviderException("Invalid Service Provider");
+            }
+           
+            this.AddAppointment(appointment);
+        }
+
+
+
     }
 }
 
-        //public void BookAppointment(Appointment appointment)
-        //{
-        //    List<Appointment> appointments = this.appointments;
-        //    bool cflag = false;
-        //    bool sflag = false;
-        //    bool isEmpty = !this.appointments.Any();
-        //    if (!isEmpty)
-        //    {
-                //var isInvalidAppointment = appointments.Any(a => ((appointment.CustomerFullName == a.CustomerFullName
-                // || appointment.ServiceProviderFullName == a.ServiceProviderFullName)
-                // && appointment.Time == a.Time)
-                // || !_availableTimes.Contains(appointment.Time))
-                // );
-                //if (isInvalidAppointment)
-                // return; // throw expection?
-
-                //    foreach (Appointment a in appointments)
-                //    {
-
-                //        if (((appointment.name == a.name
-                //        || appointment.ServiceProvidername == a.ServiceProvidername)
-                //        && appointment.Date == a.Date)
-                //        || !_availableTimes.Contains(appointment.Date))
-                //        {
-                //            return;
-                //        }
-                //    }
-                //}
-                //else if (!_availableTimes.Contains(appointment.Date))
-                //{
-                //    return;
-                //}
-                ////// isValidCustomer?
-                ////if (isInvalidCustomer(appointment.CustomerFullName))
-                ////{
-                //// // throw invalidcustomerexception
-                ////}
-                //foreach (Customer c in this.Customers)
-                //{
-                //    if (appointment.CustomerFullName == c.FullName)
-                //    {
-                //        cflag = true;
-                //        break;
-                //    }
-                //}
-                //if (!cflag)
-                //    return;
-                //foreach (ServiceProvider s in this.ServiceProviders)
-                //{
-                //    if (appointment.ServiceProviderFullName == s.FullName)
-                //    {
-                //        sflag = true;
-                //        break;
-                //    }
-                //}
-                //if (!sflag)
-                //    return;
-                //this.AddAppointment(appointment);
-                //}
-
-                //private bool IsInvalidCustomer(string fullName)
-                //{
-                // return !this.Customers.Any(c => c.FirstName == fullName);
-                //}
-            
+                
         

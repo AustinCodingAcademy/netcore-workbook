@@ -7,9 +7,13 @@ namespace Spa2.Models
 {
     public class ServiceProvider
     {
-        public int Id { get; set;}
+        public ServiceProvider()
+        {
+            Id = Guid.NewGuid();
+        }
+        public Guid Id { get; set;}
 
-        public string serviceprovider { get; set; }
+        public string FullName { get; set; }
 
     }
 }
