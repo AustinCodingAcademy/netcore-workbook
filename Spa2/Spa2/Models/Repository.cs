@@ -63,7 +63,7 @@ namespace Spa2.Models
         public void AddAppointment(Appointment appointment)
         {
             Appointments.Add(appointment);
-            Appointments = Appointments.OrderBy(a => a.Day).ThenBy(a => a.Hour).ToList();
+            
             
         }
 
@@ -78,15 +78,14 @@ namespace Spa2.Models
         {
             List<Appointment> appointments = this.Appointments;
 
-           
-
+  
             var isInvalidAppointment = appointments.Any(a => ((a.Name == appointment.Name
                 || a.Provider == appointment.Provider)
-                && a.Day == appointment.Day && a.Hour == a.Hour));
+                && a.Day == appointment.Day && a.Hour == appointment.Hour));
             if (isInvalidAppointment)
                 throw new InvalidAppointmentException("Invalid Appointment");
 
-            var isValidCustomer = Customers.Any(c => c.FirstName == appointment.Name);
+            var isValidCustomer = Customers.Any(c => c.CustomerName == appointment.Name);
             if (!isValidCustomer)
             {
                 throw new InvalidCustomerException("Invalid Customer");
@@ -97,13 +96,14 @@ namespace Spa2.Models
             {
                 throw new InvalidServiceProviderException("Invalid Service Provider");
             }
-           
+            // if all is valid, save appointment to Appointments list.
             this.AddAppointment(appointment);
         }
-
-
-
     }
+
+
+
+    
 }
 
                 

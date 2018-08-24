@@ -39,16 +39,12 @@ namespace Spa2.Controllers
             }
             catch
             {
-                ViewBag.massage = "Please select a new time";
+                ViewBag.message = "Please select a new appointment";
                 return View("Index", _repository.Appointments);
             }
-            finally
-            {
-                _repository.AddAppointment(appointment);
-                
+            
+           
 
-            }
-  
             
 
             

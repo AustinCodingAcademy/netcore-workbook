@@ -13,6 +13,17 @@ namespace Spa2.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public string CustomerName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+        
+
+
+
 
 
     }
