@@ -43,17 +43,18 @@ namespace Spa2.Models
         {
             Customers.Add(customer);
         }
+
         public void RemoveCustomer(Customer customer)
         {
             Customers.Remove(customer);
         }
-
 
         //ADD AND REMOVE SERVICE PROVIDERS
         public void AddServiceProvider(ServiceProvider serviceProvider)
         {
             ServiceProviders.Add(serviceProvider);
         }
+
         public void RemoveServiceProvider(ServiceProvider serviceProvider)
         {
             ServiceProviders.Remove(serviceProvider);
@@ -62,16 +63,12 @@ namespace Spa2.Models
         //ADD AND REMOVE APPOINTMENTS
         public void AddAppointment(Appointment appointment)
         {
-            Appointments.Add(appointment);
-            
-            
+            Appointments.Add(appointment);                       
         }
 
         public void RemoveAppointment(Appointment appointment)
         {
-            Appointments.Remove(appointment);
-            
-            
+            Appointments.Remove(appointment);                       
         }
 
         public void BookAppointment(Appointment appointment)
@@ -96,7 +93,7 @@ namespace Spa2.Models
             {
                 throw new InvalidServiceProviderException("Invalid Service Provider");
             }
-            // if all is valid, save appointment to Appointments list.
+
             this.AddAppointment(appointment);
         }
     }

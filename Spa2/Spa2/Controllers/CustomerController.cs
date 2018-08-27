@@ -11,6 +11,7 @@ namespace Spa2.Controllers
     {
         
         private readonly IRepository _repository;
+
         public CustomerController(IRepository repository)
         {
             _repository = repository;
@@ -24,18 +25,15 @@ namespace Spa2.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-           
             return View();
         }
         [HttpPost]
 
         public IActionResult Create(Customer customer)
         {
-
             _repository.AddCustomer(customer);
             return View("Index", _repository.Customers);
         }
-
 
         public IActionResult Delete(Customer customer)
         {
@@ -43,9 +41,5 @@ namespace Spa2.Controllers
             _repository.RemoveCustomer(item);
             return View("Index", _repository.Customers);
         }
-
-
-
-
     }
 }

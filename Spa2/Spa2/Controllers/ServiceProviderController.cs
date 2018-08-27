@@ -10,10 +10,12 @@ namespace Spa2.Controllers
     public class ServiceProviderController : Controller
     {
         private readonly IRepository _repository;
+
         public ServiceProviderController(IRepository repository)
         {
             _repository = repository;
         }
+
         public IActionResult Index()
         {
             return View(_repository.ServiceProviders);
@@ -39,6 +41,16 @@ namespace Spa2.Controllers
             _repository.RemoveServiceProvider(item);
             return View("Index", _repository.ServiceProviders);
         }
+
+        public IActionResult AppointmentIndex(ServiceProvider serviceProvider)
+        {
+            //_repository.AddServiceProvider(serviceProvider);
+            return View("AppointmentIndex", _repository.Appointments);
+        }
+
+
+
+
 
 
     }

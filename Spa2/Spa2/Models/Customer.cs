@@ -9,10 +9,10 @@ namespace Spa2.Models
         {
             Id = Guid.NewGuid();
         }
+
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
         public string CustomerName
         {
             get
@@ -20,11 +20,5 @@ namespace Spa2.Models
                 return FirstName + " " + LastName;
             }
         }
-        
-
-
-
-
-
     }
 }

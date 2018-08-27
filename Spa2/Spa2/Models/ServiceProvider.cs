@@ -11,9 +11,8 @@ namespace Spa2.Models
         {
             Id = Guid.NewGuid();
         }
+
         public Guid Id { get; set;}
-
         public string FullName { get; set; }
-
     }
 }
