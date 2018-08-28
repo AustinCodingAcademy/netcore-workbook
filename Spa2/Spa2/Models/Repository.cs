@@ -10,7 +10,7 @@ namespace Spa2.Models
         //LISTS
         public List<Customer> Customers { get; } = new List<Customer>();
         
-        public List<ServiceProvider> ServiceProviders { get;  } = new List<ServiceProvider>();
+        public List<ServiceProvider> ServiceProviders { get; } = new List<ServiceProvider>();
  
         public List<Appointment> Appointments { get; set; } = new List<Appointment>();
 

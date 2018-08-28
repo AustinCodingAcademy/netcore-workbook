@@ -31,6 +31,7 @@
         </tr>
     </thead>
     <tbody>
+       
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -48,11 +49,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Provider)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+
         </tr>
 }
     </tbody>

@@ -22,12 +22,32 @@ namespace Spa2.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
-        {       
+        public IActionResult Create(Customer customer, ServiceProvider serviceProvider)
+        {
+            
+            List<Customer> NewCustomers = new List<Customer>();
+            foreach(var c in _repository.Customers)
+            {
+                NewCustomers.Add(c);
+            }
+
+            ViewData["NewCustomers"] = NewCustomers;
+
+            
+
+            List<ServiceProvider> NewServiceProviders = new List<ServiceProvider>();
+            foreach (var c in _repository.ServiceProviders)
+            {
+                NewServiceProviders.Add(c);
+            }
+
+            ViewData["NewServiceProviders"] = NewServiceProviders;
+
             return View();
         }
 
         [HttpPost]
+ 
         public IActionResult Create(Appointment appointment)
         {
             try
@@ -39,9 +59,13 @@ namespace Spa2.Controllers
             {
                 ViewBag.message = "Please select a new appointment";
                 return View("Index", _repository.Appointments);
+            } 
+            finally
+            {
+                _repository.AddAppointment(appointment);    
             }
         }
- 
+
         public IActionResult Delete(Appointment appointment)
         {            
             var item = _repository.Appointments.Single(r => r.Id == appointment.Id);          
