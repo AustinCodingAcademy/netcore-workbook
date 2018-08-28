@@ -36,9 +36,9 @@ namespace Spa2.Controllers
             
 
             List<ServiceProvider> NewServiceProviders = new List<ServiceProvider>();
-            foreach (var c in _repository.ServiceProviders)
+            foreach (var item in _repository.ServiceProviders)
             {
-                NewServiceProviders.Add(c);
+                NewServiceProviders.Add(item);
             }
 
             ViewData["NewServiceProviders"] = NewServiceProviders;

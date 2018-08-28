@@ -42,9 +42,9 @@
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Customer Name</label>
                 <select asp-for="Name" class="form-control">
-                    @foreach (Customer item in ViewData["NewCustomers"] as List<Customer>)
+                    @foreach (Customer c in ViewData["NewCustomers"] as List<Customer>)
                     {
-                        <option value="@item.CustomerName">@item.CustomerName</option>
+                        <option value="@c.CustomerName">@c.CustomerName</option>
                     }
                 </select>
             </div>
