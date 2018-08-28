@@ -44,7 +44,8 @@ namespace Spa2.Controllers
 
         public IActionResult AppointmentIndex(ServiceProvider serviceProvider)
         {
-            //_repository.AddServiceProvider(serviceProvider);
+
+            /*repository.AddServiceProvider(serviceProvider);*/
             return View("AppointmentIndex", _repository.Appointments);
         }
 

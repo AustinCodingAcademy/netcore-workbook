@@ -60,10 +60,10 @@ namespace Spa2.Controllers
                 ViewBag.message = "Please select a new appointment";
                 return View("Index", _repository.Appointments);
             } 
-            finally
-            {
-                _repository.AddAppointment(appointment);    
-            }
+            //finally
+            //{
+            //    _repository.AddAppointment(appointment);    
+            //}
         }
 
         public IActionResult Delete(Appointment appointment)
