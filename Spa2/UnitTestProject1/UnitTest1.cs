@@ -22,7 +22,7 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest2
     {
-        
+
 
         [TestMethod]
         public void TestAddCusomterWorksProperly()
@@ -30,10 +30,10 @@ namespace UnitTestProject1
             IRepository repository = new Repository();
             var customercontroller = new CustomerController(repository);
             var actionresult = customercontroller.Index();
-            Assert.IsNotNull(actionresult); 
-          
-        }
+            Assert.IsNotNull(actionresult);
 
-        public class MockedRepository 
+        }
     }
+
+
 }

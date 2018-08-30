@@ -8,14 +8,9 @@ namespace Spa2.Models
 
     {
         //LISTS
-        public List<Customer> Customers { get; } = new List<Customer>();
-        
+        public List<Customer> Customers { get; } = new List<Customer>();       
         public List<ServiceProvider> ServiceProviders { get; } = new List<ServiceProvider>();
- 
         public List<Appointment> Appointments { get; set; } = new List<Appointment>();
-
-
-
 
         //EXCEPTIONS
         public class InvalidCustomerException : Exception
@@ -75,7 +70,6 @@ namespace Spa2.Models
         {
             List<Appointment> appointments = this.Appointments;
 
-  
             var isInvalidAppointment = appointments.Any(a => ((a.Name == appointment.Name
                 || a.Provider == appointment.Provider)
                 && a.Day == appointment.Day && a.Hour == appointment.Hour));

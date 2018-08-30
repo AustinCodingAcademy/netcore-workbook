@@ -27,8 +27,8 @@ namespace Spa2.Controllers
         {
             return View();
         }
-        [HttpPost]
 
+        [HttpPost]
         public IActionResult Create(Customer customer)
         {
             _repository.AddCustomer(customer);

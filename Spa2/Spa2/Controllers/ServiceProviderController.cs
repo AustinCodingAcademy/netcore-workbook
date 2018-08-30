@@ -29,7 +29,6 @@ namespace Spa2.Controllers
 
         [HttpPost]
         public IActionResult Create(ServiceProvider serviceProvider)
-
         {
             _repository.AddServiceProvider(serviceProvider);
             return View("Index", _repository.ServiceProviders);
@@ -41,18 +40,5 @@ namespace Spa2.Controllers
             _repository.RemoveServiceProvider(item);
             return View("Index", _repository.ServiceProviders);
         }
-
-        public IActionResult AppointmentIndex(ServiceProvider serviceProvider)
-        {
-
-            /*repository.AddServiceProvider(serviceProvider);*/
-            return View("AppointmentIndex", _repository.Appointments);
-        }
-
-
-
-
-
-
     }
 }
