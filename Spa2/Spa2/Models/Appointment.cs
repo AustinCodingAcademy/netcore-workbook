@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spa2.Models
 {
@@ -11,7 +12,7 @@ namespace Spa2.Models
         {
             Id = Guid.NewGuid();
         }
-        
+        [Key]
         public Guid Id { get; set; }  
         public enum Days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday }
         public Days Day { get; set; }

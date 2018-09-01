@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Spa2.Models;
+using Spa2.Data;
 
 namespace Spa2.Controllers
 {
     public class AppointmentController : Controller
     {
         private readonly IRepository _repository;
+        public ApplicationContext Context { get; }
 
-        public AppointmentController(IRepository repository)
+
+        public AppointmentController(IRepository repository, ApplicationContext context)
         {
+            Context = context;
             _repository = repository;
+
         }
 
         public IActionResult Index()
@@ -57,6 +63,8 @@ namespace Spa2.Controllers
             try
             {
                 _repository.BookAppointment(appointment);
+                Context.Appointments.Add(appointment);
+                Context.SaveChanges();
                 return View("Index", _repository.Appointments);
             }
             catch
