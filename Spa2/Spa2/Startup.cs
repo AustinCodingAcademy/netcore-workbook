@@ -42,6 +42,7 @@ namespace Spa2
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            EnsureDatabaseUpdated(app);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -62,6 +63,17 @@ namespace Spa2
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        private void EnsureDatabaseUpdated(IApplicationBuilder app)
+        {
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = scopeFactory.CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

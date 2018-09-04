@@ -11,24 +11,24 @@
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Provider" class="control-label">Service Provider</label>
-            <select asp-for="Provider" class="form-control">
-                @foreach (Appointment item in ViewData["ProviderAppointments"] as List<Appointment>)
-                {
-                    <option value="@item.Provider">@item.Provider</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label asp-for="Day" class="control-label">Day</label>
-            <select asp-for="Day" class="form-control">
-                @foreach (Appointment item in ViewData["ProviderAppointments"] as List<Appointment>)
-                {
-                    <option value="@item.Day">@item.Day</option>
-                }
-            </select>
-        </div>
-    </form>
+                <label asp-for="ServiceProvider" class="control-label">Service Provider</label>
+                <select asp-for="ServiceProvider" class="form-control">
+                    @foreach (ServiceProvider item in ViewData["NewServiceProviders"] as List<ServiceProvider>)
+                    {
+                        <option value="@item.ServiceProviderName">@item.ServiceProviderName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Day" class="control-label">Day</label>
+                <select asp-for="Day" class="form-control">
+                    @foreach (Appointment item in ViewData["ProviderAppointments"] as List<Appointment>)
+                    {
+                        <option value="@item.Day">@item.Day</option>
+                    }
+                </select>
+            </div>
+</form>
 </div>
     <div>
         <a asp-action="Index">Back to List</a>

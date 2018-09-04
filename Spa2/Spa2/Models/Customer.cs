@@ -7,10 +7,10 @@ namespace Spa2.Models
     {
         public Customer()
         {
-            Id = Guid.NewGuid();
+            CustomerId = Guid.NewGuid();
         }
 
-        public Guid Id { get; set; }
+        public Guid CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CustomerName

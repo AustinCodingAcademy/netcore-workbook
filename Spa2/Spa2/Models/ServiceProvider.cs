@@ -9,10 +9,18 @@ namespace Spa2.Models
     {
         public ServiceProvider()
         {
-            Id = Guid.NewGuid();
+            ServiceProviderId = Guid.NewGuid();
         }
 
-        public Guid Id { get; set;}
-        public string FullName { get; set; }
+        public Guid ServiceProviderId { get; set;}
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ServiceProviderName 
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
     }
 }

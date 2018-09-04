@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Spa2.Models;
 using Spa2.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Spa2.Controllers
 {
@@ -13,39 +14,44 @@ namespace Spa2.Controllers
     {
         
         private readonly IRepository _repository;
-        public ApplicationContext Context { get; }
+        public ApplicationContext _context { get; }
 
         public CustomerController(IRepository repository, ApplicationContext context)
         {
-            Context = context;
+            
             _repository = repository;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_repository.Customers);
+            return View(await _context.Customers.AsNoTracking().ToListAsync());
         }
         
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Customer customer)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Customer customer)
         {
-            _repository.AddCustomer(customer);
-            Context.Customers.Add(customer);
-            Context.SaveChanges();
-            return View("Index", _repository.Customers);
+            //_repository.AddCustomer(customer);
+            _context.Customers.Add(customer);
+            await _context.SaveChangesAsync();
+            return View("Index", _context.Customers);
         }
 
-        public IActionResult Delete(Customer customer)
+        public async Task<IActionResult> Delete(Customer customer)
         {
-            var item = _repository.Customers.Single(r => r.Id == customer.Id);
-            _repository.RemoveCustomer(item);
-            return View("Index", _repository.Customers);
+            //var item = _repository.Customers.Single(r => r.CustomerId == customer.CustomerId);
+            //_repository.RemoveCustomer(item);
+            var c = await _context.Customers.FindAsync(customer.CustomerId);
+            _context.Customers.Remove(c);
+            await _context.SaveChangesAsync();
+            return View("Index", _context.Customers);
         }
     }
 }

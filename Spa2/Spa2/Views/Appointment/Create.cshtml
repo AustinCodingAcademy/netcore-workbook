@@ -28,20 +28,20 @@
             <div class="form-group">
                 <label asp-for="Hour" class="control-label">Time</label>
                 <select asp-for="Hour" class="form-control">
-                    <option value="9">9 AM</option>
-                    <option value="10">10 AM</option>
-                    <option value="11">11 AM</option>
-                    <option value="12">12 PM</option>
-                    <option value="1">1 PM</option>
-                    <option value="2">2 PM</option>
-                    <option value="3">3 PM</option>
-                    <option value="4">4 PM</option>
+                    <option value="0">9 AM</option>
+                    <option value="1">10 AM</option>
+                    <option value="2">11 AM</option>
+                    <option value="3">12 PM</option>
+                    <option value="4">1 PM</option>
+                    <option value="5">2 PM</option>
+                    <option value="6">3 PM</option>
+                    <option value="7">4 PM</option>
                 </select>
                 <span asp-validation-for="Hour" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label">Customer Name</label>
-                <select asp-for="Name" class="form-control">
+                <label asp-for="Customer" class="control-label">Customer Name</label>
+                <select asp-for="Customer" class="form-control">
                     @foreach (Customer c in ViewData["NewCustomers"] as List<Customer>)
                     {
                         <option value="@c.CustomerName">@c.CustomerName</option>
@@ -49,11 +49,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Provider" class="control-label">Service Provider</label>
-                <select asp-for="Provider" class="form-control">
+                <label asp-for="ServiceProvider" class="control-label">Service Provider</label>
+                <select asp-for="ServiceProvider" class="form-control">
                     @foreach (ServiceProvider item in ViewData["NewServiceProviders"] as List<ServiceProvider>)
                     {
-                        <option value="@item.FullName">@item.FullName</option>
+                        <option value="@item.ServiceProviderName">@item.ServiceProviderName</option>
                     }
                 </select>
             </div>

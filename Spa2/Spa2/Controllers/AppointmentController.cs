@@ -12,33 +12,33 @@ namespace Spa2.Controllers
     public class AppointmentController : Controller
     {
         private readonly IRepository _repository;
-        public ApplicationContext Context { get; }
+        public ApplicationContext _context { get; }
 
 
         public AppointmentController(IRepository repository, ApplicationContext context)
         {
-            Context = context;
+            _context = context;
             _repository = repository;
 
         }
 
         public IActionResult Index()
         {
-            return View(_repository.Appointments);
+            return View(_context.Appointments);
         }
 
         [HttpGet]
         public IActionResult Create(Customer customer, ServiceProvider serviceProvider)
         {
             List<Customer> NewCustomers = new List<Customer>();
-            foreach (var c in _repository.Customers)
+            foreach (var c in _context.Customers)
             {
                 NewCustomers.Add(c);
             }
             ViewData["NewCustomers"] = NewCustomers;
         
             List<ServiceProvider> NewServiceProviders = new List<ServiceProvider>();
-            foreach (var item in _repository.ServiceProviders)
+            foreach (var item in _context.ServiceProviders)
             {
                 NewServiceProviders.Add(item);
             }
@@ -49,7 +49,7 @@ namespace Spa2.Controllers
         public IActionResult ProviderIndex(Appointment appointment)
         {            
             List<Appointment> ProviderAppointments = new List<Appointment>();
-            foreach (var item in _repository.Appointments)
+            foreach (var item in _context.Appointments)
             {
                 ProviderAppointments.Add(item);
             }
@@ -62,23 +62,26 @@ namespace Spa2.Controllers
         {
             try
             {
-                _repository.BookAppointment(appointment);
-                Context.Appointments.Add(appointment);
-                Context.SaveChanges();
-                return View("Index", _repository.Appointments);
+                _repository.BookAppointment(appointment, _context);
+                _context.Appointments.Add(appointment);
+                _context.SaveChanges();
+                return View("Index", _context.Appointments);
             }
             catch
             {
                 ViewBag.message = "Please select a new appointment";
-                return View("Index", _repository.Appointments);
+                return View("Index", _context.Appointments);
             }            
         }
 
-        public IActionResult Delete(Appointment appointment)
-        {           
-            var item = _repository.Appointments.Single(r => r.Id == appointment.Id);          
-            _repository.RemoveAppointment(item);
-            return View("Index", _repository.Appointments);
+        public async Task<IActionResult> Delete(Appointment appointment)
+        {
+            //var item = _repository.Appointments.Single(r => r.AppointmentId == appointment.AppointmentId);
+            //_repository.RemoveAppointment(item);
+            var a = await _context.Appointments.FindAsync(appointment.AppointmentId);
+            _context.Appointments.Remove(a);
+            await _context.SaveChangesAsync();
+            return View("Index", _context.Appointments);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Spa2.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Spa2.Models
 {
@@ -8,9 +10,9 @@ namespace Spa2.Models
 
     {
         //LISTS
-        public List<Customer> Customers { get; } = new List<Customer>();       
-        public List<ServiceProvider> ServiceProviders { get; } = new List<ServiceProvider>();
-        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
+        //public List<Customer> Customers { get; } = new List<Customer>();       
+        //public List<ServiceProvider> ServiceProviders { get; } = new List<ServiceProvider>();
+        //public List<Appointment> Appointments { get; set; } = new List<Appointment>();
 
         //EXCEPTIONS
         public class InvalidCustomerException : Exception
@@ -34,61 +36,60 @@ namespace Spa2.Models
         }
 
         //ADD AND REMOVE CUSTOMERS
-        public void AddCustomer(Customer customer)
-        {
-            Customers.Add(customer);
-        }
+        //public void AddCustomer(Customer customer)
+        //{
+        //    Customers.Add(customer);
+        //}
 
-        public void RemoveCustomer(Customer customer)
-        {
-            Customers.Remove(customer);
-        }
+        //public void RemoveCustomer(Customer customer)
+        //{
+        //    Customers.Remove(customer);
+        //}
 
-        //ADD AND REMOVE SERVICE PROVIDERS
-        public void AddServiceProvider(ServiceProvider serviceProvider)
-        {
-            ServiceProviders.Add(serviceProvider);
-        }
+        ////ADD AND REMOVE SERVICE PROVIDERS
+        //public void AddServiceProvider(ServiceProvider serviceProvider)
+        //{
+        //    ServiceProviders.Add(serviceProvider);
+        //}
 
-        public void RemoveServiceProvider(ServiceProvider serviceProvider)
-        {
-            ServiceProviders.Remove(serviceProvider);
-        }
+        //public void RemoveServiceProvider(ServiceProvider serviceProvider)
+        //{
+        //    ServiceProviders.Remove(serviceProvider);
+        //}
 
-        //ADD AND REMOVE APPOINTMENTS
-        public void AddAppointment(Appointment appointment)
-        {
-            Appointments.Add(appointment);                       
-        }
+        ////ADD AND REMOVE APPOINTMENTS
+        //public void AddAppointment(Appointment appointment)
+        //{
+        //    Appointments.Add(appointment);                       
+        //}
 
-        public void RemoveAppointment(Appointment appointment)
-        {
-            Appointments.Remove(appointment);                       
-        }
+        //public void RemoveAppointment(Appointment appointment)
+        //{
+        //    Appointments.Remove(appointment);                       
+        //}
 
-        public void BookAppointment(Appointment appointment)
+        public void BookAppointment(Appointment appointment, ApplicationContext context)
         {
-            List<Appointment> appointments = this.Appointments;
+            List<Appointment> appointments = context.Appointments.Include(x => x.ServiceProvider).Include(x => x.Customer).ToList();
 
-            var isInvalidAppointment = appointments.Any(a => ((a.Name == appointment.Name
-                || a.Provider == appointment.Provider)
-                && a.Day == appointment.Day && a.Hour == appointment.Hour));
+            var isInvalidAppointment = appointments.Any(a => (a.Customer == appointment.Customer
+                || a.ServiceProvider == appointment.ServiceProvider)
+                && a.Day == appointment.Day && a.Hour == appointment.Hour);
             if (isInvalidAppointment)
                 throw new InvalidAppointmentException("Invalid Appointment");
 
-            var isValidCustomer = Customers.Any(c => c.CustomerName == appointment.Name);
-            if (!isValidCustomer)
-            {
-                throw new InvalidCustomerException("Invalid Customer");
-            }
+            //var isvalidcustomer = context.customers.any(c => c.customername == appointment.name);
+            //if (!isvalidcustomer)
+            //{
+            //    throw new invalidcustomerexception("invalid customer");
+            //}
 
-            var isValidServiceProvider = ServiceProviders.Any(c => c.FullName == appointment.Provider);
-            if (!isValidServiceProvider)
-            {
-                throw new InvalidServiceProviderException("Invalid Service Provider");
-            }
+            //var isvalidserviceprovider = context.serviceproviders.any(c => c.serviceprovidername == appointment.provider);
+            //if (!isvalidserviceprovider)
+            //{
+            //    throw new invalidserviceproviderexception("invalid service provider");
+            //}
 
-            this.AddAppointment(appointment);
         }
     }
 

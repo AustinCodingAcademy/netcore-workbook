@@ -12,18 +12,18 @@ namespace Spa2.Controllers
     public class ServiceProviderController : Controller
     {
         private readonly IRepository _repository;
-        public ApplicationContext Context { get; }
+        public ApplicationContext _context { get; }
 
         public ServiceProviderController(IRepository repository, ApplicationContext context)
         {
             _repository = repository;
-            Context = context;
+            _context = context;
 
         }
 
         public IActionResult Index()
         {
-            return View(_repository.ServiceProviders);
+            return View(_context.ServiceProviders);
         }
 
         [HttpGet]
@@ -35,17 +35,20 @@ namespace Spa2.Controllers
         [HttpPost]
         public IActionResult Create(ServiceProvider serviceProvider)
         {
-            _repository.AddServiceProvider(serviceProvider);
-            Context.ServiceProviders.Add(serviceProvider);
-            Context.SaveChanges();
-            return View("Index", _repository.ServiceProviders);
+           // _repository.AddServiceProvider(serviceProvider);
+            _context.ServiceProviders.Add(serviceProvider);
+            _context.SaveChanges();
+            return View("Index", _context.ServiceProviders);
         }
 
-        public IActionResult Delete(ServiceProvider serviceProvider)
+        public async Task<IActionResult> Delete(ServiceProvider serviceProvider)
         {
-            var item = _repository.ServiceProviders.Single(r => r.Id == serviceProvider.Id);
-            _repository.RemoveServiceProvider(item);
-            return View("Index", _repository.ServiceProviders);
+            //var item = _context.ServiceProviders.Single(r => r.ServiceProviderId == serviceProvider.ServiceProviderId);
+            //_repository.RemoveServiceProvider(item);
+            var s = await _context.ServiceProviders.FindAsync(serviceProvider.ServiceProviderId);
+            _context.ServiceProviders.Remove(s);
+            _context.SaveChanges();
+            return View("Index", _context.ServiceProviders);
         }
     }
 }

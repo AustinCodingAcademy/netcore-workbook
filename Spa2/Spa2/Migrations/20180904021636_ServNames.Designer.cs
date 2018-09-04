@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Spa2.Data;
 
 namespace Spa2.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20180904021636_ServNames")]
+    partial class ServNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,19 +26,15 @@ namespace Spa2.Migrations
                     b.Property<Guid>("AppointmentId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("CustomerId");
-
                     b.Property<int>("Day");
 
                     b.Property<int>("Hour");
 
-                    b.Property<Guid?>("ServiceProviderId");
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Provider");
 
                     b.HasKey("AppointmentId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("ServiceProviderId");
 
                     b.ToTable("Appointments");
                 });
@@ -67,17 +65,6 @@ namespace Spa2.Migrations
                     b.HasKey("ServiceProviderId");
 
                     b.ToTable("ServiceProviders");
-                });
-
-            modelBuilder.Entity("Spa2.Models.Appointment", b =>
-                {
-                    b.HasOne("Spa2.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("Spa2.Models.ServiceProvider", "ServiceProvider")
-                        .WithMany()
-                        .HasForeignKey("ServiceProviderId");
                 });
 #pragma warning restore 612, 618
         }
