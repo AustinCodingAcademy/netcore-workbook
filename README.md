@@ -34,3 +34,4 @@
 Recommended readings
 * Anti-pattern books
 * Software patterns
+
