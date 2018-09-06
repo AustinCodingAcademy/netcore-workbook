@@ -18,7 +18,6 @@ namespace Spa2.Controllers
         {
             _repository = repository;
             _context = context;
-
         }
 
         public IActionResult Index()
@@ -33,21 +32,18 @@ namespace Spa2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ServiceProvider serviceProvider)
+        public async Task<IActionResult> Create(ServiceProvider serviceProvider)
         {
-           // _repository.AddServiceProvider(serviceProvider);
             _context.ServiceProviders.Add(serviceProvider);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return View("Index", _context.ServiceProviders);
         }
 
         public async Task<IActionResult> Delete(ServiceProvider serviceProvider)
         {
-            //var item = _context.ServiceProviders.Single(r => r.ServiceProviderId == serviceProvider.ServiceProviderId);
-            //_repository.RemoveServiceProvider(item);
             var s = await _context.ServiceProviders.FindAsync(serviceProvider.ServiceProviderId);
             _context.ServiceProviders.Remove(s);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return View("Index", _context.ServiceProviders);
         }
     }

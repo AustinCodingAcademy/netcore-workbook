@@ -7,17 +7,17 @@
 <h2>Index</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>   
+    <a asp-action="Create">Create New</a>
 </p>
 <p>@ViewBag.message</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AppointmentId)
+               Appointment Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Day)
+                Day
             </th>
             <th>
                 Time
@@ -34,31 +34,44 @@
     <tbody>
         @foreach (var item in Model)
         {
-
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AppointmentId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Day)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Hour)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerId)
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ServiceProviderId)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Delete", "Delete", new { AppointmentId = item.AppointmentId })
-                    </td>
-                </tr>
+            @foreach (var c in ViewBag.Customers)
+            {
+                if (c.CustomerId == item.CustomerId)
+                {
+                    item.Customer = c;
                 }
             }
+            @foreach (var s in ViewBag.ServiceProviders)
+            {
+                if (s.ServiceProviderId == item.ServiceProviderId)
+                {
+                    item.ServiceProvider = s;
+                }
+            }
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceProvider.ServiceProviderName)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { AppointmentId = item.AppointmentId })
+                </td>
+            </tr>
+        }
+
     </tbody>
-    
+
 </table>
-<div><a asp-action="ProviderIndex">Scheduled Appointments</a></div>
+<div><a asp-action="Index">Scheduled Appointments</a></div>

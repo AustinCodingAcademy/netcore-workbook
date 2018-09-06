@@ -14,11 +14,10 @@ namespace Spa2.Controllers
     {
         
         private readonly IRepository _repository;
-        public ApplicationContext _context { get; }
+        public ApplicationContext _context { get;  }
 
         public CustomerController(IRepository repository, ApplicationContext context)
-        {
-            
+        {           
             _repository = repository;
             _context = context;
         }
@@ -29,13 +28,12 @@ namespace Spa2.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Customer customer)
         {
             _context.Customers.Add(customer);

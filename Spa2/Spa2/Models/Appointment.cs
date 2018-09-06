@@ -7,7 +7,6 @@ namespace Spa2.Models
 {
     public partial class Appointment
     {
-
         public Appointment()
         {
             AppointmentId = Guid.NewGuid();

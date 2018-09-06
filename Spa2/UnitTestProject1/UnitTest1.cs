@@ -20,9 +20,9 @@ namespace UnitTestProject1
     }
 
 
-    [TestClass]
-    public class UnitTest2
-    {
+    //[TestClass]
+    //public class UnitTest2
+    //{
 
 
         //[TestMethod]
@@ -54,42 +54,8 @@ namespace UnitTestProject1
 
     //        public List<Appointment> Appointments { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    //        public void AddCustomer(Customer customer)
-    //        {
-    //            throw new System.NotImplementedException();
-    //        }
 
-    //        public void RemoveCustomer(Customer customer)
-    //        {
-    //            throw new System.NotImplementedException();
-    //        }
-
-    //        public void AddServiceProvider(ServiceProvider serviceProvider)
-    //        {
-    //            throw new System.NotImplementedException();
-    //        }
-
-    //        public void RemoveServiceProvider(ServiceProvider serviceProvider)
-    //        {
-    //            throw new System.NotImplementedException();
-    //        }
-
-    //        public void AddAppointment(Appointment appointment)
-    //        {
-    //            throw new System.NotImplementedException();
-    //        }
-
-    //        public void BookAppointment(Appointment appointment)
-    //        {
-    //            throw new System.NotImplementedException();
-    //        }
-
-    //        public void RemoveAppointment(Appointment appointment)
-    //        {
-    //            throw new System.NotImplementedException();
-    //        }
-    //    }
-    }
+    //}
 
 
 }
