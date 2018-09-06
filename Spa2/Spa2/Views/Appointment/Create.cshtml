@@ -40,20 +40,20 @@
                 <span asp-validation-for="Hour" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Customer" class="control-label">Customer Name</label>
-                <select asp-for="Customer" class="form-control">
-                    @foreach (Customer c in ViewData["NewCustomers"] as List<Customer>)
+                <label asp-for="CustomerId" class="control-label">Customer Name</label>
+                <select asp-for="CustomerId" class="form-control">
+                    @foreach (Customer item in ViewData["NewCustomers"] as List<Customer>)
                     {
-                        <option value="@c.CustomerName">@c.CustomerName</option>
+                        <option value="@item.CustomerId">@item.CustomerName</option>
                     }
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="ServiceProvider" class="control-label">Service Provider</label>
-                <select asp-for="ServiceProvider" class="form-control">
+                <label asp-for="ServiceProviderId" class="control-label">Service Provider</label>
+                <select asp-for="ServiceProviderId" class="form-control">
                     @foreach (ServiceProvider item in ViewData["NewServiceProviders"] as List<ServiceProvider>)
                     {
-                        <option value="@item.ServiceProviderName">@item.ServiceProviderName</option>
+                        <option value="@item.ServiceProviderId">@item.ServiceProviderName</option>
                     }
                 </select>
             </div>

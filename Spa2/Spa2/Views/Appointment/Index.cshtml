@@ -32,28 +32,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hour)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceProvider)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { AppointmentId = item.AppointmentId })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppointmentId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Day)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceProviderId)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { AppointmentId = item.AppointmentId })
+                    </td>
+                </tr>
+                }
+            }
     </tbody>
     
 </table>

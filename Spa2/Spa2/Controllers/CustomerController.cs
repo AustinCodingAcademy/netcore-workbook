@@ -38,7 +38,6 @@ namespace Spa2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Customer customer)
         {
-            //_repository.AddCustomer(customer);
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
             return View("Index", _context.Customers);
@@ -46,8 +45,6 @@ namespace Spa2.Controllers
 
         public async Task<IActionResult> Delete(Customer customer)
         {
-            //var item = _repository.Customers.Single(r => r.CustomerId == customer.CustomerId);
-            //_repository.RemoveCustomer(item);
             var c = await _context.Customers.FindAsync(customer.CustomerId);
             _context.Customers.Remove(c);
             await _context.SaveChangesAsync();

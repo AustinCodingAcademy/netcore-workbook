@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Spa2.Models;
 using Spa2.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Spa2.Controllers
 {
@@ -14,21 +15,27 @@ namespace Spa2.Controllers
         private readonly IRepository _repository;
         public ApplicationContext _context { get; }
 
-
+   
         public AppointmentController(IRepository repository, ApplicationContext context)
         {
             _context = context;
             _repository = repository;
-
         }
 
         public IActionResult Index()
         {
+            List<Customer> NewCustomers = new List<Customer>();
+            foreach (var x in _context.Customers)
+            {
+                NewCustomers.Add(x);
+            }
+            ViewData["NewCustomers"] = NewCustomers;
             return View(_context.Appointments);
         }
 
         [HttpGet]
-        public IActionResult Create(Customer customer, ServiceProvider serviceProvider)
+
+        public IActionResult Create()
         {
             List<Customer> NewCustomers = new List<Customer>();
             foreach (var c in _context.Customers)
@@ -36,7 +43,7 @@ namespace Spa2.Controllers
                 NewCustomers.Add(c);
             }
             ViewData["NewCustomers"] = NewCustomers;
-        
+
             List<ServiceProvider> NewServiceProviders = new List<ServiceProvider>();
             foreach (var item in _context.ServiceProviders)
             {
@@ -47,19 +54,20 @@ namespace Spa2.Controllers
         }
 
         public IActionResult ProviderIndex(Appointment appointment)
-        {            
+        {
             List<Appointment> ProviderAppointments = new List<Appointment>();
             foreach (var item in _context.Appointments)
             {
                 ProviderAppointments.Add(item);
             }
             ViewData["ProviderAppointments"] = ProviderAppointments;
-            return View(); 
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Appointment appointment)
+        public IActionResult Create(Appointment appointment )
         {
+            
             try
             {
                 _repository.BookAppointment(appointment, _context);
@@ -71,7 +79,8 @@ namespace Spa2.Controllers
             {
                 ViewBag.message = "Please select a new appointment";
                 return View("Index", _context.Appointments);
-            }            
+            } 
+            
         }
 
         public async Task<IActionResult> Delete(Appointment appointment)
