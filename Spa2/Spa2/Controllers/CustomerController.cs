@@ -14,7 +14,7 @@ namespace Spa2.Controllers
     {
         
         private readonly IRepository _repository;
-        public ApplicationContext _context { get;  }
+        public ApplicationContext _context { get; }
 
         public CustomerController(IRepository repository, ApplicationContext context)
         {           

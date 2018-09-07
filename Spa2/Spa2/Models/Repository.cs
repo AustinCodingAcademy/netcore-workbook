@@ -9,7 +9,6 @@ namespace Spa2.Models
     public class Repository : IRepository
 
     {
-        //EXCEPTIONS
         public class InvalidAppointmentException : Exception
         {
             public InvalidAppointmentException(string message) : base(message)
@@ -26,25 +25,8 @@ namespace Spa2.Models
                 && a.Day == appointment.Day && a.Hour == appointment.Hour);
             if (isInvalidAppointment)
                 throw new InvalidAppointmentException("Invalid Appointment");
-
-            //var isvalidcustomer = context.customers.any(c => c.customername == appointment.name);
-            //if (!isvalidcustomer)
-            //{
-            //    throw new invalidcustomerexception("invalid customer");
-            //}
-
-            //var isvalidserviceprovider = context.serviceproviders.any(c => c.serviceprovidername == appointment.provider);
-            //if (!isvalidserviceprovider)
-            //{
-            //    throw new invalidserviceproviderexception("invalid service provider");
-            //}
-
         }
-    }
-
-
-
-    
+    }    
 }
 
                 
