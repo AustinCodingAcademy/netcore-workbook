@@ -21,6 +21,7 @@ namespace BaseProject
         public void ConfigureServices(IServiceCollection services)
         {
             // Comment out if you do not have a local Sql Server installed
+            services.AddAuthentication().AddCookie();
             services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProject")));
             // Uncomment if you do not have a local Sql Server installed
             //services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
@@ -41,7 +42,7 @@ namespace BaseProject
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc();
         }
 
@@ -54,6 +55,7 @@ namespace BaseProject
                 {
                     context.Database.Migrate();
                 }
+
             }
         }
     }

@@ -17,21 +17,30 @@ namespace BaseProject.Area.Controllers
         }
 
         // GET: Comment/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
+
+        //[Route("[area]/Notes")]
+        //[Area("Comments")]
+      
+        //[Route("Views")]
+
+       [Route("Create")]
+       [HttpGet]
         // GET: Comment/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new BaseProject.Areas.Comments.Models.Create());
         }
 
         // POST: Comment/Create
+        [Route("Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Areas.Comments.Models.Create create)
         {
             try
             {

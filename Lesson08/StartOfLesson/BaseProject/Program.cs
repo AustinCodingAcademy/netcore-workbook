@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.WindowsServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.IO;
 
 namespace BaseProject
 {
@@ -9,6 +12,8 @@ namespace BaseProject
     {
         public static void Main(string[] args)
         {
+            var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
+            var pathToContentRoot = Path.GetDirectoryName(pathToExe);
             var host = CreateWebHostBuilder(args)
                 .ConfigureLogging((hostingContext, logging) =>
                 {
@@ -16,8 +21,9 @@ namespace BaseProject
                     logging.AddConsole();
                     logging.AddDebug();
                 })
+                .UseContentRoot(pathToContentRoot)
                 .Build();
-            host.Run();
+            host.RunAsService();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

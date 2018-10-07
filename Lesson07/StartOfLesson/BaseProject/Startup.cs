@@ -1,4 +1,5 @@
 ﻿using BaseProject.Data;
+using BaseProject.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ namespace BaseProject
             // Uncomment if you do not have a local Sql Server installed
             //services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("BaseProjectHosted")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +43,10 @@ namespace BaseProject
             }
 
             app.UseStaticFiles();
-
+            app.UseSignalR(conf =>
+            {
+                conf.MapHub<NotificationHub>($"/{nameof(NotificationHub)}");
+            });
             app.UseMvc();
         }
 

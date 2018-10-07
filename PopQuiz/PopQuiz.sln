@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopQuiz", "PopQuiz\PopQuiz.csproj", "{13FBED7C-01A5-4932-94F8-1B0EA1D4DDEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13FBED7C-01A5-4932-94F8-1B0EA1D4DDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13FBED7C-01A5-4932-94F8-1B0EA1D4DDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13FBED7C-01A5-4932-94F8-1B0EA1D4DDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13FBED7C-01A5-4932-94F8-1B0EA1D4DDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

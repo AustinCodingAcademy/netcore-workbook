@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using System.Linq;
 
 namespace BaseProject.Test.TagHelpers
 {
@@ -24,6 +25,7 @@ namespace BaseProject.Test.TagHelpers
             foreach (var day in Enumerable.Range(0, 6).Select(i => now.AddDays(i)))
             {
                 // Assemble
+
                 var mockDateTimeProvider = new MyMockedDateTimeProvider();
                 mockDateTimeProvider.Now = day;
                 TagHelper myTagHelper = new DayOfTheWeekTagHelper(mockDateTimeProvider);
@@ -57,6 +59,7 @@ namespace BaseProject.Test.TagHelpers
             TagHelper myTagHelper = new DayOfTheWeekTagHelper(mockDateTimeProvider);
             TagHelperContext context = null;
             TagHelperOutput output = new TagHelperOutput(
+
                 "day-of-week",
                 new TagHelperAttributeList(),
                 (useCachedResult, encoder) =>
@@ -67,12 +70,13 @@ namespace BaseProject.Test.TagHelpers
                 }
             );
 
-            // Act
-            myTagHelper.Process(context, output);
+
+
 
             // Assert
             var content = output.Content.GetContent();
             Assert.Equal("b", output.TagName);
+
         }
     }
 }

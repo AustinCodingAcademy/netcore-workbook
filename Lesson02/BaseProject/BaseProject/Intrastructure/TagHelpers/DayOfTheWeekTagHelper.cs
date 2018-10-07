@@ -11,6 +11,8 @@ namespace BaseProject.Intrastructure
     {
         private readonly IDateTimeProvider _dateTimeProvider;
 
+
+
         public DayOfTheWeekTagHelper(IDateTimeProvider dateTimeProvider)
         {
             _dateTimeProvider = dateTimeProvider;
@@ -20,6 +22,8 @@ namespace BaseProject.Intrastructure
         {
             output.TagName = "b";
             output.Content.SetContent(_dateTimeProvider.Now.DayOfWeek.ToString());
+
         }
     }
+
 }

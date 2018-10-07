@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Spa2.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<p>@ViewBag.message</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Appointment Id
+            </th>
+            <th>
+                Day
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Service Provider
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @foreach (var c in ViewBag.Customers)
+            {
+                if (c.CustomerId == item.CustomerId)
+                {
+                    item.Customer = c;
+                }
+            }
+            @foreach (var s in ViewBag.ServiceProviders)
+            {
+                if (s.ServiceProviderId == item.ServiceProviderId)
+                {
+                    item.ServiceProvider = s;
+                }
+            }
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceProvider.ServiceProviderName)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { AppointmentId = item.AppointmentId })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
