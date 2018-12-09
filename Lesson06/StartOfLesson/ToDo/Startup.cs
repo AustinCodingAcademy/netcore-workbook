@@ -1,14 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ToDoApp.Areas.Tags.Data;
 using ToDoApp.Data;
 using ToDoApp.Infrastructure;
+using ToDoApp.Models;
 using ToDoApp.Services;
 using WebServerUtilities;
 
@@ -40,13 +47,13 @@ namespace ToDoApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ToDoContext>(config => config.UseSqlServer(Configuration.GetConnectionString("ToDoApp")));    
-
+            services.AddDbContext<ToDoContext>(config => config.UseSqlServer(Configuration.GetConnectionString("ToDoApp")));
+            services.AddAuthentication().AddCookie();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -56,11 +63,14 @@ namespace ToDoApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
+
             app.UseStatusCodePagesWithReExecute("/Error", "?statusCode={0}");
             app.UseMiddleware<InternalServerErrorStatusCodeMiddleware>();
             app.UseMiddleware<UnwrapExceptionMiddleware>();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -81,9 +91,11 @@ namespace ToDoApp
             using (var serviceScope = scopeFactory.CreateScope())
             using (var toDoContext = serviceScope.ServiceProvider.GetService<ToDoContext>())
             using (var tagContext = serviceScope.ServiceProvider.GetService<TagContext>())
+            using (var identityContext = serviceScope.ServiceProvider.GetService<IdentityToDoDbContext>())
             {
                 toDoContext.Database.Migrate();
                 tagContext.Database.Migrate();
+                identityContext.Database.Migrate();
             }
         }
     }
