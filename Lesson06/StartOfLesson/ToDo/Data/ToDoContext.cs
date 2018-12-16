@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.Models;
 
 namespace ToDoApp.Data
 {
-    public class ToDoContext : DbContext, IReadOnlyToDoContext
+    public class ToDoContext : IdentityDbContext<ToDoUser, IdentityRole<int>, int>, IReadOnlyToDoContext
     {
         public ToDoContext(DbContextOptions<ToDoContext> options) : base(options)
         {
@@ -16,6 +18,8 @@ namespace ToDoApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.HasDefaultSchema("ToDos");
 
             modelBuilder.Entity<ToDo>().HasKey(x => x.Id).ForSqlServerIsClustered();

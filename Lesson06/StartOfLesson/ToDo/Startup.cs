@@ -47,7 +47,16 @@ namespace ToDoApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //configure entity framework
             services.AddDbContext<ToDoContext>(config => config.UseSqlServer(Configuration.GetConnectionString("ToDoApp")));
+
+            // configure identity provider
+            services.AddDefaultIdentity<ToDoUser>()
+                    .AddEntityFrameworkStores<ToDoContext>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders();
+
+            // configure authentication for cookies
             services.AddAuthentication().AddCookie();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -91,11 +100,9 @@ namespace ToDoApp
             using (var serviceScope = scopeFactory.CreateScope())
             using (var toDoContext = serviceScope.ServiceProvider.GetService<ToDoContext>())
             using (var tagContext = serviceScope.ServiceProvider.GetService<TagContext>())
-            using (var identityContext = serviceScope.ServiceProvider.GetService<IdentityToDoDbContext>())
             {
                 toDoContext.Database.Migrate();
                 tagContext.Database.Migrate();
-                identityContext.Database.Migrate();
             }
         }
     }
