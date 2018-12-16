@@ -1,14 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ToDoApp.Areas.Tags.Data;
 using ToDoApp.Data;
 using ToDoApp.Infrastructure;
+using ToDoApp.Models;
 using ToDoApp.Services;
 using WebServerUtilities;
 
@@ -40,13 +47,25 @@ namespace ToDoApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ToDoContext>(config => config.UseSqlServer(Configuration.GetConnectionString("ToDoApp")));    
+            //configure entity framework
+            services.AddDbContext<ToDoContext>(config => config.UseSqlServer(Configuration.GetConnectionString("ToDoApp")));
 
+            // configure identity provider
+            services.AddIdentity<ToDoUser, IdentityRole<int>>()
+                    .AddEntityFrameworkStores<ToDoContext>()
+                    // Known defect that prevents us from using Role based with out of the box Identity
+                    // Known defect in .NET Core v2.1: https://github.com/aspnet/Identity/issues/1813
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders()
+                    .AddRoleManager<RoleManager<IdentityRole<int>>>();
+
+            // configure authentication for cookies
+            services.AddAuthentication().AddCookie();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -56,11 +75,14 @@ namespace ToDoApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
+
             app.UseStatusCodePagesWithReExecute("/Error", "?statusCode={0}");
             app.UseMiddleware<InternalServerErrorStatusCodeMiddleware>();
             app.UseMiddleware<UnwrapExceptionMiddleware>();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

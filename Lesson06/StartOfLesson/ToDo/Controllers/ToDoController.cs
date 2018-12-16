@@ -1,20 +1,26 @@
 ﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ToDoApp.Areas.Tags.Data;
 using ToDoApp.Models;
 using ToDoApp.Services;
 
 namespace ToDoApp.Controllers
 {
+    [Authorize]
     public class ToDoController : Controller
     {
         private readonly IRepository _repository;
+        private readonly TagContext tagContext;
         private readonly ILogger<ToDoController> _logger;
 
-        public ToDoController(IRepository repository, ILogger<ToDoController> logger)
+        public ToDoController(IRepository repository, TagContext tagContext, ILogger<ToDoController> logger)
         {
             _repository = repository;
+            this.tagContext = tagContext;
             _logger = logger;
         }
 
@@ -43,6 +49,7 @@ namespace ToDoApp.Controllers
         {
             try
             {
+                toDo.Tags = tagContext.Tags.ToList();
                 _repository.Add(toDo);
                 return RedirectToAction(nameof(Index));
             }
