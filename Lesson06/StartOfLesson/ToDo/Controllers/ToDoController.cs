@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,7 @@ using ToDoApp.Services;
 
 namespace ToDoApp.Controllers
 {
+    [Authorize]
     public class ToDoController : Controller
     {
         private readonly IRepository _repository;

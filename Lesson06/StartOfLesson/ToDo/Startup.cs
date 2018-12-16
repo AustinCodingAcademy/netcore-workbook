@@ -51,10 +51,16 @@ namespace ToDoApp
             services.AddDbContext<ToDoContext>(config => config.UseSqlServer(Configuration.GetConnectionString("ToDoApp")));
 
             // configure identity provider
-            services.AddDefaultIdentity<ToDoUser>()
-                    .AddEntityFrameworkStores<ToDoContext>()
+            services.AddIdentity<ToDoUser, IdentityRole<int>>()
                     .AddDefaultUI()
-                    .AddDefaultTokenProviders();
+                    .AddDefaultTokenProviders()
+                    .AddEntityFrameworkStores<ToDoContext>()
+                    // Known defect that prevents us from using Role based with out of the box Identity
+                    // Known defect in .NET Core v2.1: https://github.com/aspnet/Identity/issues/1813
+                    .AddRoleManager<RoleManager<IdentityRole<int>>>();
+
+            // Known defect that prevents us from using Role based authorization
+            // Known defect in .NET Core v2.1: https://github.com/aspnet/Identity/issues/1813
 
             // configure authentication for cookies
             services.AddAuthentication().AddCookie();

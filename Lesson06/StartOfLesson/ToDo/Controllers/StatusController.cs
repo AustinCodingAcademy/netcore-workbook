@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ToDoApp.Models;
@@ -6,6 +7,7 @@ using ToDoApp.Services;
 
 namespace ToDoApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StatusController : Controller
     {
         private readonly IRepository _repository;
