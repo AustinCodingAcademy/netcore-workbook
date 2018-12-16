@@ -52,15 +52,12 @@ namespace ToDoApp
 
             // configure identity provider
             services.AddIdentity<ToDoUser, IdentityRole<int>>()
-                    .AddDefaultUI()
-                    .AddDefaultTokenProviders()
                     .AddEntityFrameworkStores<ToDoContext>()
                     // Known defect that prevents us from using Role based with out of the box Identity
                     // Known defect in .NET Core v2.1: https://github.com/aspnet/Identity/issues/1813
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders()
                     .AddRoleManager<RoleManager<IdentityRole<int>>>();
-
-            // Known defect that prevents us from using Role based authorization
-            // Known defect in .NET Core v2.1: https://github.com/aspnet/Identity/issues/1813
 
             // configure authentication for cookies
             services.AddAuthentication().AddCookie();

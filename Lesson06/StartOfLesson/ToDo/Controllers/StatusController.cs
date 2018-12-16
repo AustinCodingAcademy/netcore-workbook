@@ -7,7 +7,7 @@ using ToDoApp.Services;
 
 namespace ToDoApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class StatusController : Controller
     {
         private readonly IRepository _repository;
@@ -32,6 +32,7 @@ namespace ToDoApp.Controllers
         }
 
         // GET: Status/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -40,6 +41,7 @@ namespace ToDoApp.Controllers
         // POST: Status/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Status status)
         {
             try
@@ -54,6 +56,7 @@ namespace ToDoApp.Controllers
         }
 
         // GET: Status/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View(_repository.GetStatus(id));
@@ -62,6 +65,7 @@ namespace ToDoApp.Controllers
         // POST: Status/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id, Status status)
         {
             try
@@ -76,6 +80,7 @@ namespace ToDoApp.Controllers
         }
 
         // GET: Status/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(_repository.GetStatus(id));
@@ -84,6 +89,7 @@ namespace ToDoApp.Controllers
         // POST: Status/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id, Status status)
         {
             try
