@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using IssueTracker.Data.Repositories;
 using IssueTracker.Domain.Internal.Contracts;
 using Microsoft.AspNetCore.Builder;
@@ -18,6 +17,7 @@ namespace WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -34,6 +34,7 @@ namespace WebApi
         {
             if (env.IsDevelopment())
             {
+using System.Threading.Tasks;
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
@@ -41,7 +42,6 @@ namespace WebApi
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
             {
