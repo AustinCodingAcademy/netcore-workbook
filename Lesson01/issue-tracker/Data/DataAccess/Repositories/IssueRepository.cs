@@ -51,6 +51,7 @@ namespace IssueTracker.Data.Repositories
             current.Title = translated.Title;
             current.Description = translated.Description;
             current.Estimate = translated.Estimate;
+            current.Status = issue.Status;
             // Capture the history of states
             if ((current.Type & translated.Type) != translated.Type)
             {
