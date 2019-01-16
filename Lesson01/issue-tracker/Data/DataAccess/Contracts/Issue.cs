@@ -11,6 +11,7 @@ namespace IssueTracker.DataAccess.Contracts
         public string Title { get; set; }
         public decimal Estimate { get; set; }
         public string Description { get; set; }
+        public string Status { get; set; }
         public IssueType Type { get; set; }
     }
 }

@@ -1,0 +1,13 @@
+﻿@{
+    int minute = DateTime.Now.Minute;
+
+
+    if (minute % 2 == 0)
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_MyLayout";
+    }
+}

@@ -1,0 +1,21 @@
+﻿@model List<Status>
+
+<h2>Status Index</h2>
+
+<table>
+    <tr>
+        <th> Status</th>
+    </tr>
+
+    @foreach (var status in Model)
+    {
+        <tr>
+            <td>@status.Id</td>
+            <td>@status.Value</td>
+ 
+        </tr>
+    }
+
+
+</table>
+
