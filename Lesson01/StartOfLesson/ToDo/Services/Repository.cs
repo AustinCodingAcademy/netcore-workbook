@@ -45,7 +45,7 @@ namespace ToDoApp.Services
 
         public static void CreateToDo(IFormCollection collection)
         {
-            var todo = new ToDo { Id = Convert.ToInt32(collection["Id"]), Title = collection["Title"], Description = collection["Description"], Status = status[2] };
+            var todo = new ToDo { Id = Convert.ToInt32(collection["Id"]), Title = collection["Title"], Description = collection["Description"], Status = status[1] };
             list.Add(todo);
            
             // no need to get anything from list
