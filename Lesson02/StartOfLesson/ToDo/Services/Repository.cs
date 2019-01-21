@@ -17,9 +17,9 @@ namespace ToDoApp.Services
             new Status { Id = 3, Value = "Done" }
         };
 
-        private static List<ToDo> _toDos = new List<ToDo>
+        private static List<Models.ToDo> _toDos = new List<Models.ToDo>
         {
-            new ToDo
+            new Models.ToDo
             {
                 Id = 1,
                 Title = "My First ToDo",
@@ -27,15 +27,15 @@ namespace ToDoApp.Services
                 Status = _statuses[2],
                 Created = DateTime.Today
             },
-            new ToDo
+            new Models.ToDo
             {
                 Id = 2,
                 Title = "Add DateTime",
                 Description = "Should track when the ToDo was created",
                 Status = _statuses[1],
-                Created = DateTime.Today.AddDays(4)
+                Created = DateTime.Today.AddDays(-4)
             },
-            new ToDo
+            new Models.ToDo
             {
                 Id = 3,
                 Title = "Add day-of-the-week TagHelper",
@@ -43,7 +43,7 @@ namespace ToDoApp.Services
                 Status = _statuses[1],
                 Created = DateTime.Today
             },
-            new ToDo
+            new Models.ToDo
             {
                 Id = 4,
                 Title = "Add ViewComponent",
@@ -53,18 +53,18 @@ namespace ToDoApp.Services
             }
         };
 
-        public static IReadOnlyList<ToDo> ToDos => _toDos;
+        public static IReadOnlyList<Models.ToDo> ToDos => _toDos;
 
         public static IReadOnlyList<Status> Statuses => _statuses;
 
-        public static void Add(ToDo toDo)
+        public static void Add(Models.ToDo toDo)
         {
             toDo.Id = Interlocked.Increment(ref toDoKeyCounter);
             toDo.Status = _statuses.Find(x => x.Id == toDo.Status?.Id);
             _toDos.Add(toDo);
         }
 
-        public static void Update(int id, ToDo toDo)
+        public static void Update(int id, Models.ToDo toDo)
         {
             var index = _toDos.FindIndex(x => x.Id == id);
             _toDos.RemoveAt(index);
@@ -79,7 +79,7 @@ namespace ToDoApp.Services
             _toDos.RemoveAt(index);
         }
 
-        public static ToDo GetToDo(int id)
+        public static Models.ToDo GetToDo(int id)
         {
             return _toDos.Find(x => x.Id == id);
         }

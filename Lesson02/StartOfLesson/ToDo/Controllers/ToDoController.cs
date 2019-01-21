@@ -29,7 +29,7 @@ namespace ToDoApp.Controllers
         // POST: ToDo/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ToDo toDo)
+        public ActionResult Create(Models.ToDo toDo)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace ToDoApp.Controllers
         // POST: ToDo/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ToDo toDo)
+        public ActionResult Edit(int id, Models.ToDo toDo)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace ToDoApp.Controllers
         // POST: ToDo/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, ToDo collection)
+        public ActionResult Delete(int id, Models.ToDo collection)
         {
             try
             {
