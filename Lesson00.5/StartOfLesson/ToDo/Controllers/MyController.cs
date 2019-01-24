@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ToDo.Controllers
+namespace ToDoApp.Controllers
 {
     public class MyController : Controller
     {
