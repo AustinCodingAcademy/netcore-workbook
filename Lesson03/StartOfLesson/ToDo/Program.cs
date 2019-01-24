@@ -8,19 +8,7 @@ namespace ToDoApp
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)
-
-                .ConfigureLogging((hostingContext, logging) => 
-                {
-                    logging.AddConsole();
-
-                })
-                
-                
-                .Build()
-                
-                
-                .Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
